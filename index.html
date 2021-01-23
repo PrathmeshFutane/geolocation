@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.jpg" type="image/x-icon">
+    <title>geolocation</title>
+    <style>
+        *{
+            margin: 0px;
+            padding:0px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        .container{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 70vh;
+            background-color: #e4e4e4;
+            max-width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+        h2{
+            font-size: 40px;
+            margin-bottom: 20px;
+            color:rgb(58, 194, 58);
+        }
+        li{
+          font-size: 20px; 
+          margin-left: 20px;;
+        }
+
+        .warning-content{
+            color:red;
+            border: 2px solid red;
+            margin-top: 50px;
+            padding:30px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Geolocation API in javascript</h2>
+        <div class="content">
+            <ul>
+                <li>Allows users to provide their geographical location to web applications </li>
+                <li>simple and easy to use</li>
+                <li>only works in secure contexts (https)</li>
+            </ul>
+
+            <div class="warning-content">
+                Some priviledges of this website are RESTRICTED to you.
+                enable the location this is only for edcuational purpose.
+            </div>
+        </div>
+    </div>
+    
+
+
+    <script>
+
+        const successCallback = (position) =>{
+            console.log(position);
+        }
+        const errorCallback = (error) =>{
+            console.log(error.message);
+            
+            if(error.message == 'User denied Geolocation'){
+                alert('you are not suppose to access the page we are redirecting you');
+
+                document.querySelector('.warning-content').style.display = "block";
+            }
+        }
+
+        navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+
+        const watchId = navigator.geolocation.watchPosition(successCallback, errorCallback);
+    </script>
+</body>
+</html>
